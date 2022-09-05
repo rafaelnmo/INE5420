@@ -22,7 +22,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.objects = []       # list of tuples
         # Dict for the names of the buttons
         self.names = dict.fromkeys([0, 1, 2], ('Remove', 'Add'))
-        self.names.update({3: ('-', '+')})
         self.InitUI()  # Instantiate the application components
 
     def InitUI(self):
@@ -51,8 +50,6 @@ class MainWindow(QtWidgets.QMainWindow):
         itemPoligono = QtWidgets.QListWidgetItem("Polygon")
         self.listDrawElements.addItem(itemPoligono)
 
-        itemZoom = QtWidgets.QListWidgetItem("Zoom")
-        self.listDrawElements.addItem(itemZoom)
         # Call the function to process a click
         self.listDrawElements.clicked.connect(self.listview_clicked)
 
@@ -75,8 +72,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # Auxiliar actions
         vBoxAuxiliarActions = QtWidgets.QHBoxLayout()
 
-        self.buttonAux1 = QtWidgets.QPushButton("-")
-        self.buttonAux2 = QtWidgets.QPushButton("+")
+        self.buttonAux1 = QtWidgets.QPushButton("Remove")
+        self.buttonAux2 = QtWidgets.QPushButton("Add")
 
         vBoxAuxiliarActions.addWidget(self.buttonAux1)
         vBoxAuxiliarActions.addWidget(self.buttonAux2)
@@ -113,8 +110,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # 6º Add the Layout to the GroupBox
         self.groupBoxWindow.setLayout(vBoxWindow)
 
-        # 7º Add the GroupBox to the Parent Layout
-        vBoxMenuObjects.addWidget(self.groupBoxWindow)
+        # 1° Create the GroupBox
+        self.groupBoxZoom = QtWidgets.QGroupBox("Zoom")
 
         # 2° Create the layout
         vBoxZoom = QtWidgets.QHBoxLayout()
@@ -132,7 +129,12 @@ class MainWindow(QtWidgets.QMainWindow):
         vBoxMenuObjects.addWidget(self.label)
 
         # 6º Add the Layout to the GroupBox
-        self.groupBoxWindow.setLayout(vBoxZoom)
+        self.groupBoxZoom.setLayout(vBoxZoom)
+
+        # 7º Add the GroupBox to the Parent Layout
+        vBoxMenuObjects.addWidget(self.groupBoxWindow)
+        # 7º Add the GroupBox to the Parent Layout
+        vBoxMenuObjects.addWidget(self.groupBoxZoom)
         ### ------------- ###
 
         ### Interactions ###
@@ -157,7 +159,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         l.addWidget(groupBoxMenuFuncoes)
         l.addLayout(vertical)
-        w.setFixedSize(900, 900)
+        w.setFixedSize(900, 700)
 
         self.setCentralWidget(w)
         self.show()
