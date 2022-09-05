@@ -80,7 +80,8 @@ class MainWindow(QtWidgets.QMainWindow):
         
         itemZoom = QtWidgets.QListWidgetItem("Zoom")
         self.listDrawElements.addItem(itemZoom)
-
+        # Call the function to process a click
+        self.listDrawElements.clicked.connect(self.listview_clicked)
 
         # Objects List
         self.listObjects = QtWidgets.QListWidget()
@@ -171,6 +172,26 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setCentralWidget(w)
         self.show()
+
+    def listview_clicked(self):
+        """This function handle click on the buttons.
+
+        :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
+        :type self: class
+        """
+        text = self.listDrawElements.selectedItems()[0].text()
+        self.groupBoxActions.setTitle(text)
+
+        item = self.listDrawElements.currentRow()
+        print(item)
+        l, r = self.names[item]
+        print((l, r))
+        self.minus.setText(l)
+        self.plus.setText(r)
+
+        # self.canvas.set_funciont(item)
+        # print(item)
+        self.label.setText('Item : ' + str(item +1))
 
 
 def main():
