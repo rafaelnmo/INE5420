@@ -75,11 +75,11 @@ class MainWindow(QtWidgets.QMainWindow):
         # Auxiliar actions
         vBoxAuxiliarActions = QtWidgets.QHBoxLayout()
 
-        self.minus = QtWidgets.QPushButton("-")
-        self.plus = QtWidgets.QPushButton("+")
+        self.buttonAux1 = QtWidgets.QPushButton("-")
+        self.buttonAux2 = QtWidgets.QPushButton("+")
 
-        vBoxAuxiliarActions.addWidget(self.minus)
-        vBoxAuxiliarActions.addWidget(self.plus)
+        vBoxAuxiliarActions.addWidget(self.buttonAux1)
+        vBoxAuxiliarActions.addWidget(self.buttonAux2)
         self.groupBoxActions.setLayout(vBoxAuxiliarActions)
 
         self.label = QtWidgets.QLabel()
@@ -157,7 +157,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         l.addWidget(groupBoxMenuFuncoes)
         l.addLayout(vertical)
-        w.setFixedSize(900, 700)
+        w.setFixedSize(900, 900)
 
         self.setCentralWidget(w)
         self.show()
@@ -175,8 +175,8 @@ class MainWindow(QtWidgets.QMainWindow):
         print(item)
         l, r = self.names[item]
         print((l, r))
-        self.minus.setText(l)
-        self.plus.setText(r)
+        self.buttonAux1.setText(l)
+        self.buttonAux2.setText(r)
 
         # self.canvas.set_funciont(item)
         # print(item)
