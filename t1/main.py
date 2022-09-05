@@ -7,15 +7,17 @@ Curso: INE5420 - Computacao Grafica
 """
 
 import sys
-#from Drawings  TODO
+# from Drawings  TODO
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QWidget, QHBoxLayout, QFrame, QSplitter, QApplication, QLabel)
 from PyQt5.QtGui import QIcon
 
+
 class Canvas(QtWidgets.QLabel):
     """This class defines the drawing area."""
+
     def __init__(self):
         """Contructor for the Canvas class (i.e. the drawing area). Making possible to acces the attributes and methods of the class.
 
@@ -37,11 +39,13 @@ class Canvas(QtWidgets.QLabel):
         self.pen_color = QtGui.QColor('#000000')
         self.scale = 1
 
+
 class MainWindow(QtWidgets.QMainWindow):
     """ This class defines the main window for the application."""
+
     def __init__(self):
         """Contructor for the MainWindow class (i.e. the entire application).
-        
+
         :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
         :type self: class
         """
@@ -49,7 +53,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.objects = []       # list of tuples
         # Dict for the names of the buttons
         self.names = dict.fromkeys([0, 1, 2], ('Remove', 'Add'))
-        self.names.update({3: ('-', '+')}) #
+        self.names.update({3: ('-', '+')})
         self.InitUI()  # Instantiate the application components
 
     def InitUI(self):
@@ -61,23 +65,23 @@ class MainWindow(QtWidgets.QMainWindow):
         # 1º Create the GroupBox
         groupBoxMenuFuncoes = QtWidgets.QGroupBox("Functions ")
         groupBoxMenuFuncoes.setFont(QtGui.QFont("Sanserif", 10))
-        
+
         # 2º Create the BoxLayout
         vBoxMenuObjects = QtWidgets.QVBoxLayout()
-        
+
         ### 3º Create the items ###
         self.listDrawElements = QtWidgets.QListWidget()
         self.labelDrawElements = QLabel("Objects Options")
 
         itemPonto = QtWidgets.QListWidgetItem("Point")
         self.listDrawElements.addItem(itemPonto)
-        
+
         itemReta = QtWidgets.QListWidgetItem("Line")
         self.listDrawElements.addItem(itemReta)
-        
+
         itemPoligono = QtWidgets.QListWidgetItem("Polygon")
         self.listDrawElements.addItem(itemPoligono)
-        
+
         itemZoom = QtWidgets.QListWidgetItem("Zoom")
         self.listDrawElements.addItem(itemZoom)
         # Call the function to process a click
@@ -87,7 +91,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.listObjects = QtWidgets.QListWidget()
         self.labelObjects = QLabel("Objects List")
         # ----------------- #
-        
+
         # 4º Add items to the Layout
         vBoxMenuObjects.addWidget(self.labelDrawElements)
         vBoxMenuObjects.addWidget(self.listDrawElements)
@@ -101,23 +105,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # Auxiliar actions
         vBoxAuxiliarActions = QtWidgets.QHBoxLayout()
-        
+
         self.minus = QtWidgets.QPushButton("-")
         self.plus = QtWidgets.QPushButton("+")
-        
+
         vBoxAuxiliarActions.addWidget(self.minus)
         vBoxAuxiliarActions.addWidget(self.plus)
         self.groupBoxActions.setLayout(vBoxAuxiliarActions)
-        
+
         self.label = QtWidgets.QLabel()
         vBoxMenuObjects.addWidget(self.label)
-        
+
         groupBoxMenuFuncoes.setLayout(vBoxMenuObjects)
-        
+
         ### Window ###
-        #1° Create the GroupBox
+        # 1° Create the GroupBox
         self.groupBoxWindow = QtWidgets.QGroupBox("Window")
-        
+
         # 2° Create the layout
         vBoxWindow = QtWidgets.QVBoxLayout()
 
@@ -126,23 +130,40 @@ class MainWindow(QtWidgets.QMainWindow):
         self.right = QtWidgets.QPushButton("Right")
         self.down = QtWidgets.QPushButton("Down")
         self.left = QtWidgets.QPushButton("Left")
-        
+
         # 4° Add the items to the layout
         vBoxWindow.addWidget(self.up)
         vBoxWindow.addWidget(self.right)
         vBoxWindow.addWidget(self.down)
         vBoxWindow.addWidget(self.left)
-        
-        # 5º Add the label
+
+        # 5º Add the label to the GroupBox
         self.label = QtWidgets.QLabel()
         vBoxMenuObjects.addWidget(self.label)
-        
+
         # 6º Add the Layout to the GroupBox
         self.groupBoxWindow.setLayout(vBoxWindow)
 
         # 7º Add the GroupBox to the Parent Layout
         vBoxMenuObjects.addWidget(self.groupBoxWindow)
 
+        # 2° Create the layout
+        vBoxZoom = QtWidgets.QHBoxLayout()
+
+        # 3° Create the items
+        self.minus = QtWidgets.QPushButton("+")
+        self.plus = QtWidgets.QPushButton("-")
+
+        # 4° Add the items to the layout
+        vBoxZoom.addWidget(self.minus)
+        vBoxZoom.addWidget(self.plus)
+
+        # 5º Add the label to the GroupBox
+        self.label = QtWidgets.QLabel()
+        vBoxMenuObjects.addWidget(self.label)
+
+        # 6º Add the Layout to the GroupBox
+        self.groupBoxWindow.setLayout(vBoxZoom)
         ### ------------- ###
 
         ### Interactions ###
@@ -155,7 +176,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # zoomInButton.clicked.connect(self.canvas.on_zoom_in)
         # # dá zoom out na tela
         # zoomOutButton.clicked.connect(self.canvas.on_zoom_out)
-
 
         ### Left Box ###
 
@@ -191,23 +211,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # self.canvas.set_funciont(item)
         # print(item)
-        self.label.setText('Item : ' + str(item +1))
+        self.label.setText('Item : ' + str(item + 1))
 
-    
     def add_object(self, obj, name):
         """TODO: This function instantiate objects on the screen.
 
         :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
         :type self: class
-        
+
         :param obj: is the object to be instantiated
         :type obj:
-        
+
         :param name: is the name of the object to be instantiated
         :type name:  string
         """
         name = name + str(self.listObjects.count())
-        self.objects.append([name, [posi]])
+        #self.objects.append([name, [posi]])
         itemPoligono = QtWidgets.QListWidgetItem(name)
         self.listObjects.addItem(itemPoligono)
         self.update()
@@ -217,7 +236,7 @@ def main():
     """ Main function """
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
-    
+
     sys.exit(app.exec_())
 
 
