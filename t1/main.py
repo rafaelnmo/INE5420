@@ -37,10 +37,26 @@ class Canvas(QtWidgets.QLabel):
         self.pen_color = QtGui.QColor('#000000')
         self.scale = 1
 
+class MainWindow(QtWidgets.QMainWindow):
+    """ This class defines the main window for the application."""
+    def __init__(self):
+        """Contructor for the MainWindow class (i.e. the entire application).
+        
+        :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
+        :type self: class
+        """
+        super().__init__()
+        self.objects = []       # list of tuples
+        # Dict for the names of the buttons
+        self.names = dict.fromkeys([0, 1, 2], ('Remove', 'Add'))
+        self.names.update({3: ('-', '+')}) #
+        #self.InitUI()  # Instantiate the application components
+
+
 def main():
     """ Main function """
     app = QtWidgets.QApplication(sys.argv)
-    window = Canvas()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec_())
 
