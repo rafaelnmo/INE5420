@@ -78,6 +78,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.buttonAux1 = QtWidgets.QPushButton("-")
         self.buttonAux2 = QtWidgets.QPushButton("+")
+        self.buttonAux2.clicked.connect(self.add_object)
 
         vBoxAuxiliarActions.addWidget(self.buttonAux1)
         vBoxAuxiliarActions.addWidget(self.buttonAux2)
@@ -183,20 +184,16 @@ class MainWindow(QtWidgets.QMainWindow):
         # print(item)
         self.label.setText('Item : ' + str(item + 1))
 
-    def add_object(self, obj, name):
+    def add_object(self, s):
         """TODO: This function instantiate objects on the screen.
 
         :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
         :type self: class
 
-        :param obj: is the object to be instantiated
-        :type obj:
-
-        :param name: is the name of the object to be instantiated
-        :type name:  string
         """
-        name = name + str(self.listObjects.count())
-        #self.objects.append([name, [posi]])
-        itemPoligono = QtWidgets.QListWidgetItem(name)
-        self.listObjects.addItem(itemPoligono)
+
+        obj = self.listDrawElements.selectedItems()[0].text()
+        print("Adding item: ", obj)
+
+
         self.update()
