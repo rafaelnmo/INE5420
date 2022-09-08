@@ -199,5 +199,5 @@ class MainWindow(QMainWindow):
 
         self.update()
 
-    def import_object(self, name):
-        print("Importing object:", name)
+    def import_object(self, obj):
+        print("Importing object:", obj)

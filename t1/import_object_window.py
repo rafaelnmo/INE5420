@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import (QDialog, QDialogButtonBox, QFormLayout, QLabel, QLineEdit, QHBoxLayout, QSpinBox)
 
+from graphic_objects import Point, Wireframe
+
 class ImportObjectWindow(QDialog):
     def __init__(self, parent=None, obj="Objeto"):
         super().__init__()
@@ -40,10 +42,15 @@ class ImportObjectWindow(QDialog):
         name = self.nameEdit.text()
         x = self.x1Edit.text()
         y = self.y1Edit.text()
-        print("Object Name: {0}".format(name))
-        print("Object X: {0}".format(x))
-        print("Object Y: {0}".format(y))
-        self.parent.import_object(name)
+
+        obj = Wireframe(name, [Point("", int(x), int(y)), Point("", int(y)+10, int(x)+10)])
+
+        print("Object Name: {0}".format(obj.name))
+        print("Object X1: {0}".format(obj.points[0].x))
+        print("Object Y1: {0}".format(obj.points[0].y))
+        print("Object X2: {0}".format(obj.points[1].x))
+        print("Object Y2: {0}".format(obj.points[1].y))
+        self.parent.import_object(obj)
   
         # closing the window
         self.accept()
