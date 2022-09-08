@@ -55,6 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.listDrawElements.addItem(itemZoom)
         # Call the function to process a click
         self.listDrawElements.clicked.connect(self.listview_clicked)
+        self.listDrawElements.setCurrentItem(itemZoom)
 
         # Objects List
         self.listObjects = QtWidgets.QListWidget()
