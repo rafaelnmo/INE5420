@@ -74,7 +74,7 @@ class MainWindow(QMainWindow):
 
         self.buttonAux1 = QPushButton("-")
         self.buttonAux2 = QPushButton("+")
-        self.buttonAux2.clicked.connect(self.add_object)
+        self.buttonAux2.clicked.connect(self.open_import_window)
 
         vBoxAuxiliarActions.addWidget(self.buttonAux1)
         vBoxAuxiliarActions.addWidget(self.buttonAux2)
@@ -180,7 +180,7 @@ class MainWindow(QMainWindow):
         # print(item)
         self.label.setText('Item : ' + str(item + 1))
 
-    def add_object(self, s):
+    def open_import_window(self):
         """TODO: This function instantiate objects on the screen.
 
         :param self: represents a instance of the class MainWindow itself. Making possible to acces the attributes and methods of the class.
@@ -189,7 +189,7 @@ class MainWindow(QMainWindow):
         """
 
         obj = self.listDrawElements.selectedItems()[0].text()
-        print("Adding item: ", obj)
+        print("Adding item:", obj)
 
         dlg = ImportObjectWindow(self, obj)
         if dlg.exec():
