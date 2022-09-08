@@ -1,15 +1,9 @@
-import sys
-# from Drawings  TODO
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (
-    QWidget, QHBoxLayout, QFrame, QSplitter, QApplication, QLabel)
-from PyQt5.QtGui import QIcon
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import (QMainWindow, QGroupBox, QListWidget, QVBoxLayout, QListWidgetItem, QLabel, QHBoxLayout, QPushButton, QTextBrowser, QWidget)
 
 from canvas import Canvas
 
-
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(QMainWindow):
     """ This class defines the main window for the application."""
 
     def __init__(self):
@@ -32,33 +26,33 @@ class MainWindow(QtWidgets.QMainWindow):
         :type self: class
         """
         # 1º Create the GroupBox
-        groupBoxMenuFuncoes = QtWidgets.QGroupBox("Functions ")
+        groupBoxMenuFuncoes = QGroupBox("Functions ")
         groupBoxMenuFuncoes.setFont(QtGui.QFont("Sanserif", 10))
 
         # 2º Create the BoxLayout
-        vBoxMenuObjects = QtWidgets.QVBoxLayout()
+        vBoxMenuObjects = QVBoxLayout()
 
         ### 3º Create the items ###
-        self.listDrawElements = QtWidgets.QListWidget()
+        self.listDrawElements = QListWidget()
         self.labelDrawElements = QLabel("Objects Options")
 
-        itemPonto = QtWidgets.QListWidgetItem("Point")
+        itemPonto = QListWidgetItem("Point")
         self.listDrawElements.addItem(itemPonto)
 
-        itemReta = QtWidgets.QListWidgetItem("Line")
+        itemReta = QListWidgetItem("Line")
         self.listDrawElements.addItem(itemReta)
 
-        itemPoligono = QtWidgets.QListWidgetItem("Polygon")
+        itemPoligono = QListWidgetItem("Polygon")
         self.listDrawElements.addItem(itemPoligono)
 
-        itemZoom = QtWidgets.QListWidgetItem("Zoom")
+        itemZoom = QListWidgetItem("Zoom")
         self.listDrawElements.addItem(itemZoom)
         # Call the function to process a click
         self.listDrawElements.clicked.connect(self.listview_clicked)
         self.listDrawElements.setCurrentItem(itemZoom)
 
         # Objects List
-        self.listObjects = QtWidgets.QListWidget()
+        self.listObjects = QListWidget()
         self.labelObjects = QLabel("Objects List")
         # ----------------- #
 
@@ -70,37 +64,37 @@ class MainWindow(QtWidgets.QMainWindow):
         ### ---------------- ###
 
         # Creating Interactions
-        self.groupBoxActions = QtWidgets.QGroupBox("Actions")
+        self.groupBoxActions = QGroupBox("Actions")
         vBoxMenuObjects.addWidget(self.groupBoxActions)
 
         # Auxiliar actions
-        vBoxAuxiliarActions = QtWidgets.QHBoxLayout()
+        vBoxAuxiliarActions = QHBoxLayout()
 
-        self.buttonAux1 = QtWidgets.QPushButton("-")
-        self.buttonAux2 = QtWidgets.QPushButton("+")
+        self.buttonAux1 = QPushButton("-")
+        self.buttonAux2 = QPushButton("+")
         self.buttonAux2.clicked.connect(self.add_object)
 
         vBoxAuxiliarActions.addWidget(self.buttonAux1)
         vBoxAuxiliarActions.addWidget(self.buttonAux2)
         self.groupBoxActions.setLayout(vBoxAuxiliarActions)
 
-        self.label = QtWidgets.QLabel()
+        self.label = QLabel()
         vBoxMenuObjects.addWidget(self.label)
 
         groupBoxMenuFuncoes.setLayout(vBoxMenuObjects)
 
         ### Window ###
         # 1° Create the GroupBox
-        self.groupBoxWindow = QtWidgets.QGroupBox("Window")
+        self.groupBoxWindow = QGroupBox("Window")
 
         # 2° Create the layout
-        vBoxWindow = QtWidgets.QVBoxLayout()
+        vBoxWindow = QVBoxLayout()
 
         # 3° Create the items
-        self.up = QtWidgets.QPushButton("Up")
-        self.right = QtWidgets.QPushButton("Right")
-        self.down = QtWidgets.QPushButton("Down")
-        self.left = QtWidgets.QPushButton("Left")
+        self.up = QPushButton("Up")
+        self.right = QPushButton("Right")
+        self.down = QPushButton("Down")
+        self.left = QPushButton("Left")
 
         # 4° Add the items to the layout
         vBoxWindow.addWidget(self.up)
@@ -109,7 +103,7 @@ class MainWindow(QtWidgets.QMainWindow):
         vBoxWindow.addWidget(self.left)
 
         # 5º Add the label to the GroupBox
-        self.label = QtWidgets.QLabel()
+        self.label = QLabel()
         vBoxMenuObjects.addWidget(self.label)
 
         # 6º Add the Layout to the GroupBox
@@ -119,18 +113,18 @@ class MainWindow(QtWidgets.QMainWindow):
         vBoxMenuObjects.addWidget(self.groupBoxWindow)
 
         # 2° Create the layout
-        vBoxZoom = QtWidgets.QHBoxLayout()
+        vBoxZoom = QHBoxLayout()
 
         # 3° Create the items
-        self.minus = QtWidgets.QPushButton("+")
-        self.plus = QtWidgets.QPushButton("-")
+        self.minus = QPushButton("+")
+        self.plus = QPushButton("-")
 
         # 4° Add the items to the layout
         vBoxZoom.addWidget(self.minus)
         vBoxZoom.addWidget(self.plus)
 
         # 5º Add the label to the GroupBox
-        self.label = QtWidgets.QLabel()
+        self.label = QLabel()
         vBoxMenuObjects.addWidget(self.label)
 
         # 6º Add the Layout to the GroupBox
@@ -138,10 +132,10 @@ class MainWindow(QtWidgets.QMainWindow):
         ### ------------- ###
 
         ### Interactions ###
-        debugTextBrowser = QtWidgets.QTextBrowser()
+        debugTextBrowser = QTextBrowser()
         self.canvas = Canvas()
-        w = QtWidgets.QWidget()
-        l = QtWidgets.QHBoxLayout()
+        w = QWidget()
+        l = QHBoxLayout()
         w.setLayout(l)
         # # dá zoom in na tela
         # zoomInButton.clicked.connect(self.canvas.on_zoom_in)
@@ -151,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
         ### Left Box ###
 
         ### Left Part ###
-        vertical = QtWidgets.QVBoxLayout()
+        vertical = QVBoxLayout()
 
         vertical.addWidget(self.canvas)
         vertical.addWidget(debugTextBrowser)
