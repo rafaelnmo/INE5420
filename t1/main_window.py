@@ -1,6 +1,8 @@
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import (QMainWindow, QGroupBox, QListWidget, QVBoxLayout, QListWidgetItem, QLabel, QHBoxLayout, QPushButton, QTextBrowser, QWidget)
 
+from import_object_window import ImportObjectWindow
+
 from canvas import Canvas
 
 class MainWindow(QMainWindow):
@@ -189,5 +191,10 @@ class MainWindow(QMainWindow):
         obj = self.listDrawElements.selectedItems()[0].text()
         print("Adding item: ", obj)
 
+        dlg = ImportObjectWindow(self, obj)
+        if dlg.exec():
+            print("Success!")
+        else:
+            print("Cancel!")
 
         self.update()
