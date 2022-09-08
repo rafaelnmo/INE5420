@@ -6,11 +6,12 @@ class ImportObjectWindow(QDialog):
 
         self.setWindowTitle("Incluir {0}".format(obj))
         self.nameLineEdit = QLineEdit()
+        self.parent = parent
 
         QBtn = QDialogButtonBox.Ok | QDialogButtonBox.Cancel
 
         buttonBox = QDialogButtonBox(QBtn)
-        buttonBox.accepted.connect(self.accept)
+        buttonBox.accepted.connect(self.getInfo)
         buttonBox.rejected.connect(self.reject)
 
         # creating a form layout
@@ -22,3 +23,13 @@ class ImportObjectWindow(QDialog):
 
         layout.addWidget(buttonBox)
         self.setLayout(layout)
+    
+    def getInfo(self):
+  
+        # printing the form information
+        name = self.nameLineEdit.text()
+        print("Object Name: {0}".format(name))
+        self.parent.import_object(name)
+  
+        # closing the window
+        self.accept()

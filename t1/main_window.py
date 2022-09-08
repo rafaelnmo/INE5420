@@ -198,3 +198,6 @@ class MainWindow(QMainWindow):
             print("Cancel!")
 
         self.update()
+
+    def import_object(self, name):
+        print("Importing object:", name)
